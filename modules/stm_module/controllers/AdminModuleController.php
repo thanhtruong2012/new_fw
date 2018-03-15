@@ -14,8 +14,7 @@ class AdminModuleController extends Controller
         $this->template = new View("admin/home");
     }
 
-    public function index($a='',$b='',$c=''){
-        echo $a;die;
+    public function index(){
         $this->template->content = new View("adminModule/frm");
 
     }

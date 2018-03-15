@@ -39,6 +39,8 @@ class App{
 
         require_once CONFIG_PATH . "Config.php";
 
+
+
         if(isset($config["database"]) && !empty($config["database"]))
         {
             foreach($config["database"] as $key => $val){
@@ -48,6 +50,7 @@ class App{
 
         $path = Url::getPathInfo();
         $segments = Url::segmentUri($path);
+
         if(isset(Router::$routes[$segments[0]])){
             $module  = Router::$routes[$segments[0]]['module'];
             $controller  = Router::$routes[$segments[0]]['controller'];
@@ -87,7 +90,6 @@ class App{
                 }
             }
         }
-
         App::loadDir(MODULES_PATH.$module.DS);
         $class = ucfirst($controller) ."Controller";
 

@@ -39,11 +39,11 @@ define("DEFAULT_METHOD", "index");
 if($_SERVER['SERVER_NAME']=="ginatours.com"){
 	define("SITE_PROTOCOL","http");
 	define("SITE_HOST",$_SERVER['HTTP_HOST']);
-	define("SITE_DOMAIN","fw_new");
+	define("SITE_DOMAIN","new_fw");
 }else{
 	define("SITE_PROTOCOL","http");
 	define("SITE_HOST",$_SERVER['HTTP_HOST']);
-	define("SITE_DOMAIN","fw_new");
+	define("SITE_DOMAIN","new_fw");
 }
 define("BASE_URL",SITE_PROTOCOL."://".SITE_HOST."/".SITE_DOMAIN."/");
 
