@@ -17,3 +17,6 @@
 2018/03/14 09:56:20 : m099_user_admin Select Table 'toursys_db5.m099_user_admin' doesn't exist /fw_new/mch_core/adminLogin
 2018/03/14 09:56:21 : m099_user_admin Select Table 'toursys_db5.m099_user_admin' doesn't exist /fw_new/mch_core/adminLogin
 2018/03/14 09:56:40 : m099_user_admin Select Table 'toursys_db5.m099_user_admin' doesn't exist /fw_new/mch_core/adminLogin
+2018/03/15 14:42:21 : m099_user_admin Select Table 'toursys_shop.m099_user_admin' doesn't exist /new_fw/admin_login
+2018/03/15 14:42:23 : m099_user_admin Select Table 'toursys_shop.m099_user_admin' doesn't exist /new_fw/admin_login
+2018/03/15 14:42:25 : m099_user_admin Select Table 'toursys_shop.m099_user_admin' doesn't exist /new_fw/admin_login

@@ -24,9 +24,17 @@ class Router
         self::$routes[$url] = $config;
     }
 
-    public static function url()
+    public static function getRoute($path)
     {
-
+        if(!empty(self::$routes)){
+            foreach(self::$routes as $key => $val){
+                //preg_replace('/^(:action|*)+/\/')
+                if(strpos($path,$key) !== false){
+                    return $key;
+                }  
+            }
+        }
+        return "";
     }
 
 }

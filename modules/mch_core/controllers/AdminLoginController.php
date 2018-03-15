@@ -32,6 +32,19 @@ class AdminLoginController extends Controller
         }
         $this->template->content = new View("adminLogin/frm");
     }
+    
+    public function test(){
+        //ko dc ab*,ac*,bc*,abc*
+        //email
+        $pattern = '/^[a-zA-Z0-9-]+/';
+        $str = "at+";
+        if(preg_match_all($pattern,$str,$matches)>1){
+            var_dump(false);
+        }else{
+            var_dump($matches);
+        }
+        die;
+    }
 
 
 }

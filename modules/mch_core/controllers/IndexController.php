@@ -16,7 +16,6 @@ class IndexController extends Controller
 
     public function index($a='',$b=''){
         $this->template->content = new View("index/frm");
-        echo $a;
-        echo $b;die;
+        
     }
 }

@@ -16,7 +16,6 @@ class AdminModuleController extends Controller
 
     public function index(){
         $this->template->content = new View("adminModule/frm");
-
     }
 
 }

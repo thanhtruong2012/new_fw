@@ -47,23 +47,23 @@ class App{
                 Database::instance($key,$val);
             }
         }
+        
+        $pt = '/[a-zA-Z0-9_\-\/]+(\/:action|\/\*)/';
+        $st = '/admin-_module/list/:action';
+        var_dump(preg_match($pt,$st,$mathes));
+        var_dump($mathes);die;
 
         $path = Url::getPathInfo();
-        $segments = Url::segmentUri($path);
-
-        if(isset(Router::$routes[$segments[0]])){
-            $module  = Router::$routes[$segments[0]]['module'];
-            $controller  = Router::$routes[$segments[0]]['controller'];
-            $method  = DEFAULT_METHOD;
-            if(!empty(Router::$routes[$segments[0]]['action'])){
-                $method = Router::$routes[$segments[0]]['action'];
-            }else{
-                if(isset($segments[1]) && !empty($segments[1])){
-                    $method = $segments[1];
-                    unset($segments[1]);
-                }
-            }
-            unset($segments[0]);
+        $routePath = Router::getRoute($path);
+        
+        if(isset(Router::$routes[$routePath])){
+            $module  = Router::$routes[$routePath]['module'];
+            $controller  = Router::$routes[$routePath]['controller'];
+            $method = Router::$routes[$routePath]['action'];
+            
+            $unRoutePath = str_replace($routePath,"",$path);
+            $segments = Url::segmentUri($unRoutePath);
+            
         }else{
             $module  = DEFAULT_MODULE;
             $controller  = DEFAULT_CONTROLLER;
@@ -90,13 +90,16 @@ class App{
                 }
             }
         }
+        
+        echo $controller;die;
+        
         App::loadDir(MODULES_PATH.$module.DS);
         $class = ucfirst($controller) ."Controller";
 
         if(!class_exists($class)){
             throw new SBException("$class is not exists");
         }
-
+        
         if(!method_exists($class,$method))
         {
             throw new SBException("Function '$method' is not exist.");
@@ -109,20 +112,20 @@ class App{
         }
 
         $view = $controller."/".$method;
-        $controler = new $class;
+        $controller = new $class;
 
         if(!empty($segments))
         {
-            eval('$controler->{$method}("'.implode('","', $segments).'");');
+            eval('$controller->{$method}("'.implode('","', $segments).'");');
 
         } else {
-            $controler->{$method}();
+            $controller->{$method}();
         }
-        if(empty($controler->template->content)){
-            $controler->template->content = new View($view);
+        if(empty($controller->template->content)){
+            $controller->template->content = new View($view);
         }
-        if (method_exists($controler,"setMessage")) {
-            $controler->setMessage();
+        if (method_exists($controller,"setMessage")) {
+            $controller->setMessage();
         }
         //START VIEW
         $sess_client = false;
@@ -137,9 +140,9 @@ class App{
 
         //set content value
         $content = '';
-        if(isset($controler->template->content)&&!empty($controler->template->content)){
-            if(is_a($controler->template->content,"View")){
-                foreach($controler->template->content as $key=>$val){
+        if(isset($controller->template->content)&&!empty($controller->template->content)){
+            if(is_a($controller->template->content,"View")){
+                foreach($controller->template->content as $key=>$val){
                     if($key=='tsf_filename' || $key=='tsf_filetype'){
                         continue;
                     }
@@ -147,7 +150,7 @@ class App{
 
                 }
                 $ref = new ReflectionClass($class);
-                $fileName = dirname(dirname($ref->getFileName()))."/views/".strtolower($controler->template->content->tsf_filename).".".strtolower($controler->template->content->tsf_filetype);
+                $fileName = dirname(dirname($ref->getFileName()))."/views/".strtolower($controller->template->content->tsf_filename).".".strtolower($controller->template->content->tsf_filetype);
                 if(file_exists($fileName)){
                     ob_start();
                     require $fileName;
@@ -157,29 +160,29 @@ class App{
                     throw new SBException("Content View Not Exists", 1);
                 }
             }else{
-                $content = $controler->template->content;
+                $content = $controller->template->content;
             }
         }
 
 
 
         //set template value
-        if(isset($controler->template)&&!empty($controler->template)){
-            if(isset($controler->template_param)&&!empty($controler->template_param)){
-                foreach($controler->template_param as $key=>$val){
+        if(isset($controller->template)&&!empty($controller->template)){
+            if(isset($controller->template_param)&&!empty($controller->template_param)){
+                foreach($controller->template_param as $key=>$val){
                     if(strtolower($key)!='content'){
                         Eval("$".$key."=\$val".";");
                     }
                 }
             }
-            foreach($controler->template as $key=>$val){
+            foreach($controller->template as $key=>$val){
                 if(strtolower($key)!='content'){
                     Eval("$".$key."=\$val".";");
                 }
             }
 
-            if(file_exists("template/".$controler->template->tsf_filename.".".$controler->template->tsf_filetype)){
-                require "template/".$controler->template->tsf_filename.".".$controler->template->tsf_filetype;
+            if(file_exists("template/".$controller->template->tsf_filename.".".$controller->template->tsf_filetype)){
+                require "template/".$controller->template->tsf_filename.".".$controller->template->tsf_filetype;
             }else{
                 //ERROR
                 throw new SBException("Template View Not Exists", 1);
