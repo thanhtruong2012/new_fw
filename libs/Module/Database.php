@@ -498,8 +498,6 @@ class Database extends PDO
 
         }
 
-
-
         return $this;
 
     }
@@ -1190,13 +1188,13 @@ class Database extends PDO
 
         if(empty($storeName)){
 
-            return new Error("Store cannot empty");
+            throw new SBException("Store cannot empty");
 
         }
 
         if(empty($data) && !is_array($data)){
 
-            return new Error("Data Error");
+            throw new SBException("Data Error");
 
         }
 
@@ -1266,7 +1264,7 @@ class Database extends PDO
 
             if(is_array($sqlError)&&isset($sqlError[0])&&$sqlError[0]!='0000'){
 
-                return new Error((isset($sqlError[2]))?('Code: '.$sqlError[1].'<br/>Type: MySQL Error<br/>Fatal Error: '.$sqlError[2]):'SQL Error.');
+                throw new SBException((isset($sqlError[2]))?('Code: '.$sqlError[1].'<br/>Type: MySQL Error<br/>Fatal Error: '.$sqlError[2]):'SQL Error.');
 
             }
 
@@ -1276,7 +1274,7 @@ class Database extends PDO
 
             if(empty($columns) && !is_array($columns)){
 
-                return new Error("Table <i>$tableName</i> Has Error");
+                throw new SBException("Table <i>$tableName</i> Has Error");
 
             }
 
@@ -1292,7 +1290,7 @@ class Database extends PDO
 
         }catch(Exception $e){
 
-            return new Error('Fatal Error: '.$e->getMessage().' File: '.$e->getFile().' Line: '.$e->getLine());
+            throw new SBException('Fatal Error: '.$e->getMessage().' File: '.$e->getFile().' Line: '.$e->getLine());
 
         }
 

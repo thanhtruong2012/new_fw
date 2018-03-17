@@ -47,14 +47,23 @@ class App{
                 Database::instance($key,$val);
             }
         }
-        
-        $pt = '/[a-zA-Z0-9_\-\/]+(\/:action|\/\*)/';
-        $st = '/admin-_module/list/:action';
-        var_dump(preg_match($pt,$st,$mathes));
-        var_dump($mathes);die;
+
+        //$pt = '/[a-zA-Z0-9_\-\/]+\/:action*[\/*]*/';
+        //$pt = '/[a-zA-Z0-9_\-\/]+(\/:action)(\/\*)/';
+        //$st = '/admin-_module/list/:action/*';
+
+        //$pt[] = '/\/:action/';
+        //$pt[] = '/\/\*/';
+        //$st = '/admin-_module/list/:action/*';
+
+        //var_dump(preg_match($pt,$st,$matches));
+        //var_dump(preg_replace($pt,"",$st));die;
+        //var_dump($matches);die;
 
         $path = Url::getPathInfo();
         $routePath = Router::getRoute($path);
+
+        echo $routePath;die;
         
         if(isset(Router::$routes[$routePath])){
             $module  = Router::$routes[$routePath]['module'];

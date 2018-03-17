@@ -1,4 +1,10 @@
 <?php
+// Set error handler
+set_error_handler(array('SBException', 'exception_handler'));
+
+// Set exception handler
+set_exception_handler(array('SBException', 'exception_handler'));
+
 if(strpos($_SERVER['SERVER_NAME'],"ginatours.com") === false){
     //localhost server
     $user1 = "root";

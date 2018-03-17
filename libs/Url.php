@@ -258,11 +258,11 @@ class Url
      *
      * @return string → segments
      */
-    public static function segmentUri($uri = null)
+    public static function segmentUri($uri = null,$limit = PHP_INT_MAX)
     {
         $uri = (! is_null($uri)) ? $uri : $_SERVER['REQUEST_URI'];
 
-        return explode('/', trim($uri, '/'));
+        return explode('/', trim($uri, '/'), $limit);
     }
 
     /**
@@ -308,7 +308,10 @@ class Url
      */
     public static function getPathInfo()
     {
-        $path = parse_url($_SERVER['PATH_INFO'], PHP_URL_PATH);
-        return !empty($path)?trim($path,"/"):"/";
+        if(isset($_SERVER['PATH_INFO'])){
+            $path = parse_url($_SERVER['PATH_INFO'], PHP_URL_PATH);
+            return !empty($path)?trim($path,"/"):"/";
+        }
+        return "/";
     }
 }
