@@ -39,8 +39,6 @@ class App{
 
         require_once CONFIG_PATH . "Config.php";
 
-
-
         if(isset($config["database"]) && !empty($config["database"]))
         {
             foreach($config["database"] as $key => $val){
@@ -48,31 +46,17 @@ class App{
             }
         }
 
-        //$pt = '/[a-zA-Z0-9_\-\/]+\/:action*[\/*]*/';
-        //$pt = '/[a-zA-Z0-9_\-\/]+(\/:action)(\/\*)/';
-        //$st = '/admin-_module/list/:action/*';
-
-        //$pt[] = '/\/:action/';
-        //$pt[] = '/\/\*/';
-        //$st = '/admin-_module/list/:action/*';
-
-        //var_dump(preg_match($pt,$st,$matches));
-        //var_dump(preg_replace($pt,"",$st));die;
-        //var_dump($matches);die;
-
         $path = Url::getPathInfo();
-        $routePath = Router::getRoute($path);
+        $router = Router::getRoute($path);
 
-        echo $routePath;die;
-        
-        if(isset(Router::$routes[$routePath])){
-            $module  = Router::$routes[$routePath]['module'];
-            $controller  = Router::$routes[$routePath]['controller'];
-            $method = Router::$routes[$routePath]['action'];
-            
-            $unRoutePath = str_replace($routePath,"",$path);
-            $segments = Url::segmentUri($unRoutePath);
-            
+        if($router !== false){
+            $module  = $router['module'];
+            $controller  = $router['controller'];
+            $method = $router['action'];
+            $segments = false;
+            if(!empty($router["*"])){
+                $segments = Url::segmentUri($router["*"]);
+            }
         }else{
             $module  = DEFAULT_MODULE;
             $controller  = DEFAULT_CONTROLLER;
@@ -99,8 +83,6 @@ class App{
                 }
             }
         }
-        
-        echo $controller;die;
         
         App::loadDir(MODULES_PATH.$module.DS);
         $class = ucfirst($controller) ."Controller";
@@ -156,7 +138,6 @@ class App{
                         continue;
                     }
                     Eval("$".$key."=\$val".";");
-
                 }
                 $ref = new ReflectionClass($class);
                 $fileName = dirname(dirname($ref->getFileName()))."/views/".strtolower($controller->template->content->tsf_filename).".".strtolower($controller->template->content->tsf_filetype);

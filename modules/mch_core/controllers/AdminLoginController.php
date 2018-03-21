@@ -24,6 +24,7 @@ class AdminLoginController extends Controller
                 'user_email' => addslashes(Request::post('Email')),
                 'user_pass' => addslashes(Request::post('Pass')),
             );
+
             $oData = $this->UserAdminUtil->login($iData);
             if(!empty($oData)){
                 $_SESSION['sess_admin'] = $oData;

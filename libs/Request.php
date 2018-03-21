@@ -166,7 +166,7 @@ class Request
      * @return string
      */
     public static function post($name){
-        return isset($_POST[$name])?$_POST[$name]:"";
+        return isset($_POST[$name])?$_POST[$name]:false;
     }
 
     /**
@@ -175,6 +175,6 @@ class Request
      * @return string
      */
     public static function get($name){
-        return isset($_GET[$name])?$_GET[$name]:"";
+        return isset($_GET[$name])?$_GET[$name]:false;
     }
 }

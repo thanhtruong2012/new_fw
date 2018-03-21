@@ -9,35 +9,41 @@
 class Router
 {
     public static $routes = array();
-    public static function connect($url,$config)
+
+    public static function setRoute($url,$route)
     {
-        if(!(isset($config['module']) && !empty($config['module']))){
+        if(!(isset($route['module']) && !empty($route['module']))){
             throw new SBException("$url route config module wrong");
         }
-        if(!(isset($config['controller']) && !empty($config['controller']))){
+        if(!(isset($route['controller']) && !empty($route['controller']))){
             throw new SBException("$url route config controller wrong");
         }
-        if(strpos($url,":action") === false && !(isset($config['action'])&&!empty($config['action'])) ){
+
+        if(strpos($url,":action")!== false && (isset($route['action'])&&!empty($route['action']))){
+            throw new SBException("$url route config action wrong");
+        }
+
+        if(strpos($url,":action") === false && !(isset($route['action'])&&!empty($route['action'])) ){
             throw new SBException("$url route config action wrong");
         }
         /*if(!(isset($config['action']) && !empty($config['action']))){
             throw new SBException("$url route config action wrong");
         }*/
-        $url = trim($url,"/");
-        self::$routes[$url] = $config;
+        if($url!="/"){
+            $url = trim($url,"/");
+        }
+        self::$routes[$url] = $route;
     }
 
     public static function getRoute($path)
     {
-        $pt = array();
-        $pt[] = '/\/:action/';
-        $pt[] = '/\/\*/';
-        $routeKey = '';
+        $pt = array('/\/:action/','/\/\*/');
+        $routeKey = '/';
         $route = '';
         if(!empty(self::$routes)){
             foreach(self::$routes as $key => $val){
                 $route = preg_replace($pt,"",$key);
-                if(!empty($route) && strpos($path,$route) !== false){
+                if(!empty($route) && $route != "/" && strpos($path,$route) !== false){
                     $routeKey = $key;
                     break;
                 }
@@ -69,13 +75,63 @@ class Router
             }
         }
 
+        if(isset(self::$routes[$routeKey]) && !empty(self::$routes[$routeKey])){
+            $data = array(
+                "module" => !empty(self::$routes[$routeKey]['module'])?self::$routes[$routeKey]['module']:"",
+                "controller" => !empty(self::$routes[$routeKey]['controller'])?self::$routes[$routeKey]['controller']:"",
+                "action" => !empty($temp[':action'])?$temp[':action']:DEFAULT_METHOD,
+                "*" => !empty($temp['*'])?$temp['*']:""
+            );
+            return $data;
+        }
 
-        var_dump($temp);die;
+        return false;
+    }
 
-        var_dump($seg1);
-        var_dump($seg2);
-        die;
-        return "";
+    public static function getUrl($route){
+        if(!(isset($route['module']) && !empty($route['module']))){
+            throw new SBException("Module config empty");
+        }
+        if(!(isset($route['controller']) && !empty($route['controller']))){
+            throw new SBException("Controller config empty");
+        }
+        if(!(isset($route['action']) && !empty($route['action']))){
+            throw new SBException("Action config empty");
+        }
+        $lastSegment = (isset($route['*']) && !empty($route['*']))?$route['*']:"";
+        $temp = "/";
+        if(!empty(self::$routes)){
+            foreach(self::$routes as $key => $val){
+                if ($val['module'] == $route['module'] && $val['controller'] == $route['controller']){
+                    if(isset($route['action']) && !empty($route['action'])){
+                        $temp = $key;
+                        break;
+                    }elseif(strpos($key,":action") !== false){
+                        $temp = $key;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if($temp == "/"){
+            return BASE_URL;
+        }
+
+        $pt = array('/\/:action/','/\/\*/');
+        $url = preg_replace($pt,"",$temp);
+        if(!empty($url)){
+            $url = BASE_URL.$url;
+            if($route['action']!="index"){
+                $url.="/".$route['action'];
+            }
+            if(isset($route['*']) && !empty($route['*'])){
+                $url.="/".$route['*'];
+            }
+            return $url;
+        }
+        return BASE_URL;
+
     }
 
 

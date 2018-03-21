@@ -201,4 +201,7 @@ class Model
     public function lastInsertId(){
         return $this->db->lastInsertId();
     }
+    public function getColumns(){
+        return $this->db->getTableColumns($this->table_name);
+    }
 }

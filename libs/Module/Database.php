@@ -1244,12 +1244,6 @@ class Database extends PDO
 
     }
 
-
-
-
-
-
-
     public function getTableColumns($tableName){
 
         try{
@@ -1270,23 +1264,21 @@ class Database extends PDO
 
             $columns = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
-
             if(empty($columns) && !is_array($columns)){
 
                 throw new SBException("Table <i>$tableName</i> Has Error");
 
             }
 
-            $data = array();
+            /*$data = array();
 
             foreach($columns as $col){
 
                 $data[$col['COLUMN_NAME']] = '';
 
-            }
+            }*/
 
-            return $data;
+            return $columns;
 
         }catch(Exception $e){
 

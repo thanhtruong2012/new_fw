@@ -61,7 +61,7 @@ class SBException extends Exception
             $arr_file = explode('\\',$file);
             $file = is_array($arr_file) ? $arr_file[count($arr_file)-1] : '';
 
-            throw new SBException('Code: '.$code.'<br/>Type: '.$type.'<br/>Fatal Error: '.$message.'<br/>File: '.$file.'<br/>Line: '.$line);
+            throw new SBException('Code: '.$code.' Type: '.$type.' Fatal Error: '.$message.' File: '.$file.' Line: '.$line);
 
         }catch (Exception $e){
             throw new SBException('Fatal Error: '.$e->getMessage().' File: '.$e->getFile().' Line: '.$e->getLine());
