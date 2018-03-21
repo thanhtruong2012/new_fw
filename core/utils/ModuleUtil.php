@@ -70,11 +70,18 @@ class ModuleUtil extends Util
         $oData = array();
 
         $this->db->beginTransaction();
-
-        $oData = $this->ModuleModel->saveOne($iData);
-        if($iData[''])
+        
+        $module_id = 0;
+        if(!empty($iData['module_id'])){
+            $oData = $this->ModuleModel->updateOne($iData);
+            $module_id = $iData['module_id'];
+        }else{
+            $oData = $this->ModuleModel->insertOne($iData);
+            $module_id = $this->db->lastInsertId();
+        }
+        
         if($oData){
-            $oData = $this->ModuleModel->get($iData['module_id']);
+            $oData = $this->ModuleModel->get($module_id);
         }
 
         if($flg){

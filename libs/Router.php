@@ -40,14 +40,20 @@ class Router
         $pt = array('/\/:action/','/\/\*/');
         $routeKey = '/';
         $route = '';
+        $flg = false;
         if(!empty(self::$routes)){
             foreach(self::$routes as $key => $val){
                 $route = preg_replace($pt,"",$key);
                 if(!empty($route) && $route != "/" && strpos($path,$route) !== false){
                     $routeKey = $key;
+                    $flg = true;
                     break;
                 }
             }
+        }
+        
+        if(!$flg){
+            $routeKey = "";
         }
 
         $temp = array(
@@ -120,6 +126,7 @@ class Router
 
         $pt = array('/\/:action/','/\/\*/');
         $url = preg_replace($pt,"",$temp);
+        
         if(!empty($url)){
             $url = BASE_URL.$url;
             if($route['action']!="index"){

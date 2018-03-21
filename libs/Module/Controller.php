@@ -34,7 +34,7 @@ class Controller
     private function  init_admin(){
         if(!(isset($_SESSION["sess_admin"])&&!empty($_SESSION["sess_admin"]))){
             $this->sess_admin = array();
-            Url::redirect(BASE_URL."mch_core/adminLogin");
+            Url::redirect(Router::getUrl(array("module"=>"mch_core","controller"=>"AdminLogin","action"=>"index")));
         }else{
             $this->sess_admin = $_SESSION["sess_admin"];
         }
