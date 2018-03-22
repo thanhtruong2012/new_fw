@@ -18,9 +18,9 @@ class ModuleModel extends Model
     public function get($id = "", $select = "*"){
         $this->db->select($select);
         if(!empty($id)){
-            $this->db->{is_array($id)?"in":"where"}("module_id",$id);
+            $this->db->{SBArray::valid($id)?"in":"where"}("module_id",$id);
         }
-        if($id == "" || (!empty($id) && is_array($id))){
+        if($id == "" || (!empty($id) && SBArray::valid($id))){
             $result = $this->select();
         }else{
             $result = $this->selectOne();
