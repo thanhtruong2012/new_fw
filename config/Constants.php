@@ -46,5 +46,6 @@ if($_SERVER['SERVER_NAME']=="ginatours.com"){
 	define("SITE_DOMAIN","new_fw");
 }
 define("BASE_URL",SITE_PROTOCOL."://".SITE_HOST."/".SITE_DOMAIN."/");
+define("SBJ_API_URL","http://localhost/ginatours.com/api.ginatours.com/");
 
 

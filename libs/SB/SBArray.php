@@ -406,23 +406,23 @@ class SBArray
     }
     public static function isEmpty($arr){
 
-    $null_flg = true;
+        $null_flg = true;
 
-    foreach($arr as $v){
+        foreach($arr as $v){
 
-        if(!empty($v)){
+            if(!empty($v)){
 
-            $null_flg = false;
+                $null_flg = false;
 
-            break;
+                break;
+
+            }
 
         }
 
+        return $null_flg;
+
     }
-
-    return $null_flg;
-
-}
 
     /**
      * GetInstance
@@ -440,4 +440,5 @@ class SBArray
     private function __construct()
     {
     }
+
 }

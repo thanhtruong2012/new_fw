@@ -14,9 +14,11 @@ class ModuleUtil extends Util
         $this->loadModel("ModuleModel");
     }
 
+    /**
+     * @return array - table module columns
+     */
     public function getColumns(){
         $flg = true;
-        $oData = array();
 
         $this->db->beginTransaction();
 
@@ -31,9 +33,11 @@ class ModuleUtil extends Util
         return $oData;
     }
 
+    /**
+     * @return array - list of modules
+     */
     public function getList(){
         $flg = true;
-        $oData = array();
 
         $this->db->beginTransaction();
 
@@ -48,9 +52,12 @@ class ModuleUtil extends Util
         return $oData;
     }
 
+    /**
+     * @param $id integer - module id
+     * @return array - detail of module
+     */
     public function getDetail($id){
         $flg = true;
-        $oData = array();
 
         $this->db->beginTransaction();
 
@@ -65,13 +72,15 @@ class ModuleUtil extends Util
         return $oData;
     }
 
+    /**
+     * @param $iData array - module data is submit from input form
+     * @return array - detail of new module
+     */
     public function save($iData){
         $flg = true;
-        $oData = array();
 
         $this->db->beginTransaction();
-        
-        $module_id = 0;
+
         if(!empty($iData['module_id'])){
             $oData = $this->ModuleModel->updateOne($iData);
             $module_id = $iData['module_id'];
