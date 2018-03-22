@@ -22,4 +22,43 @@ class UserAdminModel extends Model
         $result = $this->selectOne();
         return $result;
     }
+
+    // CRUD
+    public function get($id = "", $select = "*"){
+        $this->db->select($select);
+        if(!empty($id)){
+            $this->db->{SBArray::valid($id)?"in":"where"}("user_id",$id);
+        }
+        if($id == "" || (!empty($id) && SBArray::valid($id))){
+            $result = $this->select();
+        }else{
+            $result = $this->selectOne();
+        }
+        return $result;
+    }
+
+    public function getList($iData, $limit, $offset, $select = "*"){
+        $this->db->select($select);
+        if(!empty($iData)&&SBArray::valid($iData)){
+            foreach ($iData as $keyData => $valueData) 
+            {
+                $this->db->where($keyData,$valueData);
+            }
+        }
+        $this->db->limit($limit);
+        $this->db->offset($offset);
+        $result = $this->select();
+        return $result;
+    }
+
+    public function getCount($iData){
+        if(!empty($iData)&&SBArray::valid($iData)){
+            foreach ($iData as $keyData => $valueData) 
+            {
+                $this->db->where($keyData,$valueData);
+            }
+        }
+        $result = $this->selectCount();
+        return $result;
+    }
 }

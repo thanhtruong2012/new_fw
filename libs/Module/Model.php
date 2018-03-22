@@ -144,7 +144,7 @@ class Model
         return $rs;
     }
 
-    public  function selectCount($where){
+    public  function selectCount(){
         $str = "";
         if(is_array($this->primary_key)){
             if(!empty($this->primary_key)){

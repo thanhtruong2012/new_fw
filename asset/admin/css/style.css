@@ -1,0 +1,264 @@
+1. Menu*/
+/*2. Boostrap customs*/
+/*3. Margin*/
+/*4. Padding*/
+/*5. Content*/
+	/*5.1 Register*/
+
+html,body,section{
+    height:100%;
+}
+section{
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+body{
+	font: 500 14px/1.5remメイリオ, Meiryo, verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+/* 1. Menu*/
+	#main-menu > nav.navbar{
+		background-color: #292961;
+	}
+	#main-menu .bg-menu{
+		/*box-shadow: 0 0.005rem 0.005rem 0;*/
+		box-shadow: 0.5px 1px 1px #000;
+	}
+	#main-menu #sbt-logo{
+		max-height: 50px;
+		margin-right:15px;
+	}
+
+	#main-menu .ul-main-menu > ul{
+		font-weight: 600;
+	}
+	#main-menu .ul-main-menu > ul > li > a{
+		color:white;
+	} 
+	#main-menu .group-login > a{
+		color:white;
+		padding:5px;
+	}
+/*End Menu*/
+
+/* 2. Bootstrap*/
+	.custom-control-label{
+		position: relative;
+	    padding-left: 22.5px
+	}
+	label{
+		padding: .375rem .75rem;
+		margin-bottom: 0;
+	}
+	label.lb-required::after{
+		content: ' *';
+		color:red;	
+	}
+	.custom-control-label::before,
+	.custom-control-label::after{
+		top: .75rem;
+	}
+	.navbar-brand{
+		font-size: 1rem;
+	}
+/*End Bootstrap */
+
+/* 3. Margin */
+	/*Top*/
+		.m_top_5{margin-top: 5px;}
+		.m_top_10{margin-top: 10px;}
+		.m_top_15{margin-top: 15px;}
+		.m_top_25{margin-top: 25px;}
+		.m_top_30{margin-top: 30px;}
+		.m_top_40{margin-top: 40px;}
+		.m_top_50{margin-top: 50px;}
+		.m_top_60{margin-top: 60px;}
+	/* End Top */
+	/*Bottom*/
+		.m_bottom_5{margin-bottom: 5px;}
+		.m_bottom_10{margin-bottom: 10px;}
+		.m_bottom_15{margin-bottom: 15px;}
+		.m_bottom_25{margin-bottom: 25px;}
+		.m_bottom_50{margin-bottom: 50px;}
+	/*End Bottom*/
+/* END Margin*/
+
+/* 4. Padding */
+	/*Top*/
+		.p_top_5{padding-top: 5px;}
+		.p_top_10{padding-top: 10px;}
+		.p_top_15{padding-top: 15px;}
+		.p_top_25{padding-top: 25px;}
+		.p_top_50{padding-top: 50px;}
+	/* End Top */
+	/*Bottom*/
+		.p_bottom_5{padding-bottom: 5px;}
+		.p_bottom_10{padding-bottom: 10px;}
+		.p_bottom_15{padding-bottom: 15px;}
+		.p_bottom_25{padding-bottom: 25px;}
+		.p_bottom_50{padding-bottom: 50px;}
+	/*End Bottom*/
+/* END Padding*/
+
+/* 5. Content*/
+	/* 5.0 ALL page content*/
+		h2.title-content-page{
+			text-align: center;
+		}
+		h3.title-content-page{
+			text-align: center;
+		}
+		.text-light{
+			color:white;
+		}
+	/* End All page content*/
+	/* 5.1 Register */
+		.content-page .content-register{}
+		.content-page .content-register table.tb-register{}
+		.content-page .content-register table.tb-register > tbody > tr > th:first-child{
+			background: #fafafa;
+			text-align: right;
+		}
+	/*End Register*/
+	/* 5.2 Module list */
+		.content-page .content-module-list{}
+		.content-page .content-module-list .layout-left{}
+		.content-page .content-module-list .layout-right{}
+		.content-page .content-module-list table.tb-list-module{}
+		.content-page .content-module-list table.tb-list-module tr > .tb-chk{
+			text-align:center;
+			width: 50px;
+		}
+		.content-page .content-module-list table.tb-list-module tr > .tb-name{
+			font-weight: 600;
+		}
+		.content-page .content-module-list table.tb-list-module tr > .tb-price{
+			color:red;
+			font-weight: 600;
+			text-align: right;
+		}
+	/*End Register*/
+/*End Content*/
+/* Checkbox */
+	[type=checkbox].sbchk_custom+label{
+		padding:0;
+	}
+	[type=checkbox].sbchk_custom:checked, [type=checkbox].sbchk_custom:not(:checked) {
+	    position: absolute;
+	    left: -9999px;
+	    opacity: 0;
+	}
+	th > [type=checkbox].sbchk_custom+label {
+		top:.5rem;
+	}
+	td > [type=checkbox].sbchk_custom+label {
+		top:.25rem;
+	}
+	[type=checkbox].sbchk_custom+label {
+	    left: 5px;
+	    font-weight: 400;	   
+	    position: relative;
+	    padding-left: 15px;
+	    padding-right: 15px;
+	    cursor: pointer;
+	    display: inline-block;
+	    height: 25px;
+	    line-height: 25px;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -khtml-user-select: none;
+	    -ms-user-select: none;
+	}
+	[type=checkbox].sbchk_custom-in+label:after {
+	    border-radius: 2px;
+	}
+	[type=checkbox].sbchk_custom+label:after, [type=checkbox].sbchk_custom+label:before {
+	    content: '';
+	    left: 0;
+	    position: absolute;
+	    -webkit-transition: border .25s, background-color .25s, width .2s .1s, height .2s .1s, top .2s .1s, left .2s .1s;
+	    -o-transition: border .25s, background-color .25s, width .2s .1s, height .2s .1s, top .2s .1s, left .2s .1s;
+	    transition: border .25s, background-color .25s, width .2s .1s, height .2s .1s, top .2s .1s, left .2s .1s;
+	    z-index: 1;
+	}
+	[type=checkbox].sbchk_custom:not(:checked)+label:before {
+	    width: 0;
+	    height: 0;
+	    border: 3px solid transparent;
+	    left: 6px;
+	    top: 10px;
+	    -webkit-transform: rotateZ(37deg);
+	    -ms-transform: rotate(37deg);
+	    transform: rotateZ(37deg);
+	    -webkit-transform-origin: 20% 40%;
+	    -ms-transform-origin: 100% 100%;
+	    transform-origin: 100% 100%}
+	[type=checkbox].sbchk_custom:not(:checked)+label:after {
+	    height: 20px;
+	    width: 20px;
+	    background-color: transparent;
+	    border: 2px solid #5a5a5a;
+	    top: 0;
+	    z-index: 0;
+	}
+
+	[type=checkbox].sbchk_custom.tabbed:focus+label:after {
+	    border-radius: 2px;
+	    border-color: #5a5a5a;
+	    background-color: rgba(0, 0, 0, .1);
+	}
+	[type=checkbox].sbchk_custom.tabbed:checked:focus+label:after {
+	    border-radius: 2px;
+	    background-color: #45aef1;
+	    border-color: #45aef1;
+	}
+	[type=checkbox].sbchk_custom:disabled:not(:checked)+label:before {
+	    background-color: transparent;
+	    border: 2px solid transparent;
+	}
+	[type=checkbox].sbchk_custom:disabled:not(:checked)+label:after {
+	    border-color: transparent;
+	    background-color: #BDBDBD;
+	}
+	[type=checkbox].sbchk_custom:disabled:checked+label:before {
+	    background-color: transparent;
+	}
+	[type=checkbox].sbchk_custom:disabled:checked+label:after {
+	    background-color: #BDBDBD;
+	    border-color: #BDBDBD;
+	}
+	/*None - checked*/
+
+	/*End none - checked*/
+	/*Checked*/
+	[type=checkbox].sbchk_custom:checked+label:after {
+	    top: 0;
+	    width: 20px;
+	    height: 20px;
+	    border: 2px solid #45aef1;
+	    background-color: #45aef1;
+	    z-index: 0;
+	}
+	[type=checkbox].sbchk_custom:checked+label:before {
+	    top: .15rem;
+	    left: 1px;
+	    width: 8px;
+	    height: 13px;
+	    border-top: 2px solid transparent;
+	    border-left: 2px solid transparent;
+	    -webkit-transform: rotateZ(37deg);
+	    -ms-transform: rotate(37deg);
+	    transform: rotateZ(37deg);
+	    -webkit-transform-origin: 100% 100%;
+	    -ms-transform-origin: 100% 100%;
+	    transform-origin: 100% 100%;
+	}
+	[type=checkbox].sbchk_custom:checked+label:before {
+    	border-right: 2px solid #fff!important;
+	    border-bottom: 2px solid #fff!important;
+	}
+	[type=checkbox]:checked.sbchk_custom+label:before {
+	    border-right: 2px solid #45aef1;
+	    border-bottom: 2px solid #45aef1;
+	}
+/* End Checkbox
