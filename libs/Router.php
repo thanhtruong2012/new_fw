@@ -63,13 +63,15 @@ class Router
 
         if($route != $routeKey){
             //replace route vs routeKey
-            $seg1 = Url::segmentUri(str_replace($route,"",$routeKey));
+            $from = '/'.preg_quote($route, '/').'/';
+            $seg1 = Url::segmentUri(preg_replace($from,"",$routeKey,1));
             $limit = 1;
             if(in_array(":action",$seg1)){
                 $limit = 2;
             }
+            
             //replace route vs path
-            $seg2 = Url::segmentUri(str_replace($route,"",$path),$limit);
+            $seg2 = Url::segmentUri(preg_replace($from,"",$path,1),$limit);
             $i = 0;
             foreach($temp as $key => $val){
                 if(empty($val)){

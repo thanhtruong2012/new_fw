@@ -15,8 +15,6 @@ class AdminUserController extends Controller
         $this->loadUtil("UserAdminUtil");
     }
 
-
-
     public function index(){
         $this->__getList();
     }
@@ -86,7 +84,6 @@ class AdminUserController extends Controller
 
     public function search(){
         if (Request::isGET()){
-
             $iData = SBArray::removeEmpty($_GET);
             $iData = SBArray::removeKeys($iData,array('page'));
             $this->__getList($iData);
@@ -113,7 +110,7 @@ class AdminUserController extends Controller
         $oColumn = $this->UserAdminUtil->getColumns();
         
         $oPagin = new Pagination($page, $count, $limit, Router::getUrl(array("module"=>"stm_user","controller"=>"AdminUser","action"=>"search")));
-        // ddd($oPagin->html);
+        
         $oUrl = array(
             "form_url" => Router::getUrl(array("module"=>"stm_user","controller"=>"AdminUser","action"=>"search")),
             "create_url" => Router::getUrl(array("module"=>"stm_user","controller"=>"AdminUser","action"=>"create")),
