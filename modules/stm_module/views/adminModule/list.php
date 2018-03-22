@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col col-lg-2">
             <form action="<?php echo $oUrl['form_url']?>" method="post">
-                <div class="card" style="width: 18rem;">
+                <div class="card">
                     <div class="card-header">
                         Search
                     </div>

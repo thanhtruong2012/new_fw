@@ -12,7 +12,7 @@
                                         <?php echo $valColumn['COLUMN_NAME']?>
                                     </th>
                                     <td>
-                                        <input name="module['<?php echo $valColumn['COLUMN_NAME']?>']" class="form-control" value="<?php echo $oData[$valColumn['COLUMN_NAME']]?>"/>
+                                        <input name="module[<?php echo $valColumn['COLUMN_NAME']?>]" class="form-control" value="<?php echo $oData[$valColumn['COLUMN_NAME']]?>"/>
                                     </td>
                                 </tr>
                             <?php }?>
